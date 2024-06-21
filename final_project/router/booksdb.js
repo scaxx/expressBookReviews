@@ -11,4 +11,57 @@ let books = {
       10: {"author": "Samuel Beckett","title": "Molloy, Malone Dies, The Unnamable, the trilogy", "reviews": {} }
 }
 
+function getBooks() {
+
+    return new Promise((resolve, reject) => {
+        
+        setTimeout(() => {
+            resolve(books);
+        }, 5000);
+    });
+}
+
+function getBookByISBN(isbn) {
+
+    return new Promise((resolve, reject) => {
+        
+        setTimeout(() => {
+            if (books[isbn]) {
+                resolve(books[isbn]);
+            } else {
+                reject({ message: "Book not found" });
+            }
+        }, 5000); 
+    });
+}
+
+function getBooksByAuthor(author) {
+    return new Promise((resolve, reject) => {
+        
+        setTimeout(() => {
+            const filteredBooks = Object.values(books).filter(book => book.author === author);
+            if (filteredBooks.length > 0) {
+                resolve(filteredBooks);
+            } else {
+                reject({ message: "Books by author not found" });
+            }
+        }, 5000); 
+    });
+}
+
+function getBooksByTitle(title) {
+    return new Promise((resolve, reject) => {
+        
+        setTimeout(() => {
+            const filteredBooks = Object.values(books).filter(book => book.title === title);
+            if (filteredBooks.length > 0) {
+                resolve(filteredBooks);
+            } else {
+                reject({ message: "Books by title not found" });
+            }
+        }, 5000);
+    });
+}
+
+module.exports = { getBooks: getBooks, getBookByISBN: getBookByISBN, getBooksByAuthor: getBooksByAuthor, getBooksByTitle: getBooksByTitle };
 module.exports=books;
